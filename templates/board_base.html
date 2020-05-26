@@ -1,0 +1,134 @@
+{% load static %}
+<!doctype html>
+<html lang='ko'>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+        <!-- Bootstrap CSS -->
+        <link rel='stylesheet' type='text/css' href='{% static "css/bootstrap.min.css" %}'>
+        <!-- shopy CSS 미사용 -->
+        <link rel='stylesheet' type='text/css' href='{% static "style.css" %}'>
+        <title>우리는 Shopy!</title>
+    </head>
+
+    <body>
+        <!--- 네비게이션 바 부분 include --->
+        {% include 'navbar.html' %}
+        <div class="container my-3">
+            <!--- 상속받는 템플릿의 구현부분--->
+            <div class='row justify-content-between my-3'>
+                <div class='col-2'> <!-- 글정렬조건 시작-->
+                    <select class='form-control sort_list'>
+                        <option value='recent' {% if sort_list == 'recent' %}selected{% endif %}>최신순</option>
+                        <option value='recommend' {% if sort_list == 'recommend' %}selected{% endif %}>추천순</option>
+                        <option value='popular' {% if sort_list == 'popular' %}selected{% endif %}>인기순</option>
+                    </select>
+                </div> <!-- 글정렬조건 끝 -->
+
+                <div class='col-2'> <!-- 지역별 정렬조건 시작-->
+                    <select class='form-control category_local'>
+                        <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>
+                        <option value='Jongno-gu' {% if category_local == 'Jongno-gu' %}selected{% endif %}>종로구</option>
+                        <option value='Jung-gu' {% if category_local == 'Jung-gu' %}selected{% endif %}>중구</option>
+                        <option value='Yongsan-gu' {% if category_local == 'Yongsan-gu' %}selected{% endif %}>용산구</option>
+                        <option value='Seongdong-gu' {% if category_local == 'Seongdong-gu' %}selected{% endif %}>성동구</option>
+                        <option value='Gwangjin-gu' {% if category_local == 'Gwangjin-gu' %}selected{% endif %}>광진구</option>
+                        <option value='Dongdaemun-gu' {% if category_local == 'Dongdaemun-gu' %}selected{% endif %}>동대문구</option>
+                        <option value='Jungnang-gu' {% if category_local == 'Jungnang-gu' %}selected{% endif %}>중랑구</option>
+                        <option value='Seongbuk-gu' {% if category_local == 'Seongbuk-gu' %}selected{% endif %}>성북구</option>
+                        <option value='Gangbuk-gu' {% if category_local == 'Gangbuk-gu' %}selected{% endif %}>강북구</option>
+                        <option value='Dobong-gu' {% if category_local == 'Dobong-gu' %}selected{% endif %}>동북구</option>
+                        <option value='Nowon-gu' {% if category_local == 'Nowon-gu' %}selected{% endif %}>노원구</option>
+                        <option value='Eunpyeong-gu' {% if category_local == 'Eunpyeong-gu' %}selected{% endif %}>은평구</option>
+                        <option value='Seodaemun-gu' {% if category_local == 'Seodaemun-gu' %}selected{% endif %}>서대문구</option>
+                        <option value='Mapo-gu' {% if category_local == 'Mapo-gu' %}selected{% endif %}>마포구</option>
+                        <option value='Yangcheon-gu' {% if category_local == 'Yangcheon-gu' %}selected{% endif %}>양천구</option>
+                        <option value='Gangseo-gu' {% if category_local == 'Gangseo-gu' %}selected{% endif %}>강서구</option>
+                        <option value='Guro-gu' {% if category_local == 'Guro-gu' %}selected{% endif %}>구로구</option>
+                        <option value='Geumcheon-gu' {% if category_local == 'Geumcheon-gu' %}selected{% endif %}>금천구</option>
+                        <option value='Yeongdeungpo-gu' {% if category_local == 'Yeongdeungpo-gu' %}selected{% endif %}>영등포구</option>
+                        <option value='Gwanak-gu' {% if category_local == 'Gwanak-gu' %}selected{% endif %}>관악구</option>
+                        <option value='Seocho-gu' {% if category_local == 'Seocho-gu' %}selected{% endif %}>서초구</option>
+                        <option value='Gangnam-gu' {% if category_local == 'Gangnam-gu' %}selected{% endif %}>강남구</option>
+                        <option value='Songpa-gu' {% if category_local == 'Songpa-gu' %}selected{% endif %}>송파구</option>
+                        <option value='Gangdong-gu' {% if category_local == 'Gangdong-gu' %}selected{% endif %}>강동구</option>
+                    </select>
+                </div> <!-- 지역별 정렬조건 끝 -->
+
+                <div class='col-2'> <!-- 업종별 정렬조건 시작-->
+                    <select class='form-control cartegory_sectors'>
+                        <option value='' {% if cartegory_sectors == '' %}selected{% endif %}> --업종별--</option>
+                        <option value='conduct' {% if cartegory_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
+                        <option value='marketing' {% if cartegory_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
+                        <option value='IT' {% if cartegory_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>
+                        <option value='design' {% if cartegory_sectors == 'design' %}selected{% endif %}>디자인</option>
+                        <option value='circulation' {% if cartegory_sectors == 'circulation' %}selected{% endif %}>무역·유통</option>
+                        <option value='sales' {% if cartegory_sectors == 'sales' %}selected{% endif %}>영업·고객상담</option>
+                        <option value='service' {% if cartegory_sectors == 'service' %}selected{% endif %}>서비스</option>
+                        <option value='R&D' {% if cartegory_sectors == 'R&D' %}selected{% endif %}>연구개발·설계</option>
+                        <option value='production' {% if cartegory_sectors == 'production' %}selected{% endif %}>생산·제조</option>
+                        <option value='education' {% if cartegory_sectors == 'education' %}selected{% endif %}>교육</option>
+                        <option value='erection' {% if cartegory_sectors == 'erection' %}selected{% endif %}>건설</option>
+                        <option value='medical' {% if cartegory_sectors == 'medical' %}selected{% endif %}>의료</option>
+                        <option value='media' {% if cartegory_sectors == 'media' %}selected{% endif %}>미디어</option>
+                        <option value='specialty' {% if cartegory_sectors == 'specialty' %}selected{% endif %}>전문 특수직</option>
+                    </select>
+                </div> <!-- 업종별 정렬조건 끝 -->
+
+                <div class='col-4 input-group'> <!-- 검색창 시작-->
+                    <input type='text' class='form-control kw' value='{{ kw|default_if_none:"" }}'>
+                    <div class='input-group-append'>
+                        <button class="btn btn-outline-secondary" type='button' id='btn_search'>검색</button>
+                    </div>
+                </div> <!-- 검색창 끝 -->
+            </div> 
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- JQuery JS-->
+        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <!-- Bootstrap JS-->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+        <!-- 글정렬 스크립트 기능 -->
+        <script type='text/javascript'>
+            $(document).ready(function(){
+                $(".page-link").on('click', function(){
+                    $("#page").val($(this).data("page"));
+                    $("#searchForm").submit();
+                });
+    
+                $("#btn_search").on('click', function(){    /* 검색버튼 스크립트 */
+                    $("#kw").val($(".kw").val());
+                    $("#page").val(1);
+                    $("#searchForm").submit();
+                });
+    
+                $(".sort_list").on('change', function(){    /* 글정렬 스크립트 */
+                    $("#sort_list").val($(this).val());
+                    $("#page").val(1);
+                    $("#searchForm").submit();
+                });
+    
+                $(".sort_local").on('change', function(){    /* 지역별정렬 스크립트 */
+                    $("#sort_local").val($(this).val());
+                    $("#page").val(1);
+                    $("#searchForm").submit();
+                });
+    
+                $(".sort_sectors").on('change', function(){    /* 산업별정렬 스크립트 */
+                    $("#sort_sectors").val($(this).val());
+                    $("#page").val(1);
+                    $("#searchForm").submit();
+                });
+            });
+        </script>
+        <!-- 글정렬 스크립트 끝 -->
+
+        <!-- 자바스크립트 부분 -->
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>

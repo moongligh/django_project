@@ -1,0 +1,115 @@
+{% extends 'board_base.html' %}
+{% load shopy_filter %}
+{% block content %} <!-- base.html body내 구현부분 시작-->
+    <!-- 화면 구성 부분 -->
+        <table class="table">
+            <thead>
+                <tr class="thead-dark text-center"><!-- 목록 상단부분 -->
+                    <th>번호</th>
+                    <th style='width:50%'>제목</th>
+                    <th>추천수</th>
+                    <th>글쓴이</th>
+                    <th>작성일시</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if QnA_list %}
+                    {% for QnA in QnA_list %} <!-- 등록된 질문수 만큼 반복하기 시작 -->
+                        <tr class='text-center'>
+                            <!--- 게시판에 보여지는 글 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 --->
+                            <td>
+                                {{ QnA_list.paginator.count|sub:QnA_list.start_index|sub:forloop.counter0|add:1 }}
+                            </td>
+
+                            <!--- 글 제목 --->
+                            <td class='text-left'>
+                                <a href="{% url 'shopy:QNA_detail' QnA.id %}">{{ QNA.subject }}</a>
+                                
+                                <!--- 답변갯수 표시부분 --->
+                                {% if QnA.comment_set.count > 0 %}
+                                    <span class='text-danger small ml-2'>{{ QNA.comment_set.count }}</span>
+                                {% endif %}
+                            </td>
+                            
+                            
+                            <td> <!-- 추천수 시작 -->
+                                {% if QNA.voter.all.count > 0 %}
+                                    <span class="badge badge-warning px-2 py-1">{{ QNA.voter.all.count }}</span>
+                                {% endif %}
+                            </td> <!-- 추천수 끝 -->
+
+                            <td>
+                                {{ QNA.author.username }} <!--- 글 작성자 --->
+                            </td>
+
+                            <td>
+                                {{ QNA.create_date }} <!--- 글 생성일 --->
+                            </td>
+                        </tr>
+                    {% endfor %} <!-- 등록된 게시글 수 만큼 반복하기 끝 -->
+                {% else %}  <!-- 등록된 게시글이 없을경우 시작 -->
+                    <tr>
+                        <td colspan="3"> 게시글이 없습니다. </td>
+                    </tr>
+                {% endif %} <!-- 등록된 게시글이 없을경우 끝 -->
+            </tbody>
+        </table>
+
+        <!--- 페이징처리부분 시작 --->
+        <ul class='pagination justify-content-center'>
+
+            <!-- 이전페이지 시작 -->
+            {% if QnA_list.has_previous %}
+                <li class='page-item'> <!--- 이전페이지가 있을경우 --->
+                    <a class='page-link' data-page='{{ QnA_list.previous_page_number }}' href='#'>이전</a>
+                </li>
+            {% else %}
+                <li class='page-item disabled'> <!--- 이전페이지가 없을경우 --->
+                    <a class='page-link' tabindex='-1' aria-disabled='True' href='#'>이전</a>
+                </li>
+            {% endif %}
+
+            <!--- 페이지리스트부분 시작 --->
+            {% for page_number in QnA_list.paginator.page_range %} <!--- 페이지 넘버만큼 반복for --->
+                {% if page_number >= QnA_list.number|add:-5 and page_number <= QnA_list.number|add:5 %} <!--- 현재 community_list.number 기준으로 5만큼 작은것부터 5만큼 큰 페이지넘버 보여주기 --->
+                    {% if page_number == QnA_list.number %} <!-- 페이지넘버와 페이지 리스트의 글번호가 같을경우  -->
+                        <li class='page-item active' aria-current='page'>
+                            <a class='page-link' data-page='{{ page_number }}' href='#'>
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %} <!-- 같지 않을 경우 -->
+                        <li class='page-item'>
+                            <a class='page-link' data-page='{{ page_number }}' href='#'>
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <!-- 다음페이지부분 시작-->
+            {% if QnA_list.has_next %}
+                <li class='page-item'> <!-- 다음페이지가 있을경우 -->
+                    <a class='page-link' data-page='{{ QnA_list.next_page_number }}' href='#'>다음</a>
+                </li>
+            {% else %}
+                <li class='page-item disabled'> <!-- 다음페이지가 없을경우 -->
+                    <a class='page-link' tabindex='-1' aria-disabled='True' href='#'>다음</a>
+                </li>
+            {% endif %}
+        </ul>
+        <!-- 페이징 처리 끝 -->
+
+        <a href="{% url 'shopy:QNA_create' %}" class='btn btn-primary'> 글 작성하기 </a>
+    <!-- 화면 구성부분 끝 -->
+
+    <form id='searchForm' method='get' action='{% url "shopy:QNA_list" %}'> <!-- 폼생성 시작 -->
+        <input type='hidden' id='kw' name='kw' value='{{ kw|default_if_none:"" }}'>
+        <input type='hidden' id='page' name='page' value='{{ page }}'>
+        <input type='hidden' id='sort_list' name='sort_list' value='{{ sort_list }}'>
+        <input type='hidden' id='category_local' name='category_local' value='{{ category_local }}'>
+        <input type='hidden' id='categort_sectors' name='category_sectors' value='{{ category_sectors }}'>
+    </form> <!-- 폼생성 끝 -->
+
+{% endblock %} <!-- board_base.html내 구현부분 끝-->

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--- base.html 내부 구현부분 시작 --->
+<div class='container'>
+    <h5 class='my-3 border-bottom pb-2'> 질문등록 </h5>
+    <form method='post' class='post-form my-3'>
+
+        <!--- POST방식을 이용할때 이용하는 장고기본 미들웨이 --->
+        {% csrf_token %}
+
+        <!--- 오류표시 시작-->
+        {% if form.errors %}
+            <div class='alert alert-danger' role='alert'>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <strong>{{ field.label }}</strong>
+                        {{ field.errors }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!--- 오류표시 끝 --->
+
+        <div class='row my-3 from-group'>
+            <div class='col-2'> <!-- 지역별 정렬조건 시작-->
+                <select class='form-control category_local'>
+                    <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>
+                    <option value='Jongno-gu' {% if category_local == 'Jongno-gu' %}selected{% endif %}>종로구</option>
+                    <option value='Jung-gu' {% if category_local == 'Jung-gu' %}selected{% endif %}>중구</option>
+                    <option value='Yongsan-gu' {% if category_local == 'Yongsan-gu' %}selected{% endif %}>용산구</option>
+                    <option value='Seongdong-gu' {% if category_local == 'Seongdong-gu' %}selected{% endif %}>성동구</option>
+                    <option value='Gwangjin-gu' {% if category_local == 'Gwangjin-gu' %}selected{% endif %}>광진구</option>
+                    <option value='Dongdaemun-gu' {% if category_local == 'Dongdaemun-gu' %}selected{% endif %}>동대문구</option>
+                    <option value='Jungnang-gu' {% if category_local == 'Jungnang-gu' %}selected{% endif %}>중랑구</option>
+                    <option value='Seongbuk-gu' {% if category_local == 'Seongbuk-gu' %}selected{% endif %}>성북구</option>
+                    <option value='Gangbuk-gu' {% if category_local == 'Gangbuk-gu' %}selected{% endif %}>강북구</option>
+                    <option value='Dobong-gu' {% if category_local == 'Dobong-gu' %}selected{% endif %}>동북구</option>
+                    <option value='Nowon-gu' {% if category_local == 'Nowon-gu' %}selected{% endif %}>노원구</option>
+                    <option value='Eunpyeong-gu' {% if category_local == 'Eunpyeong-gu' %}selected{% endif %}>은평구</option>
+                    <option value='Seodaemun-gu' {% if category_local == 'Seodaemun-gu' %}selected{% endif %}>서대문구</option>
+                    <option value='Mapo-gu' {% if category_local == 'Mapo-gu' %}selected{% endif %}>마포구</option>
+                    <option value='Yangcheon-gu' {% if category_local == 'Yangcheon-gu' %}selected{% endif %}>양천구</option>
+                    <option value='Gangseo-gu' {% if category_local == 'Gangseo-gu' %}selected{% endif %}>강서구</option>
+                    <option value='Guro-gu' {% if category_local == 'Guro-gu' %}selected{% endif %}>구로구</option>
+                    <option value='Geumcheon-gu' {% if category_local == 'Geumcheon-gu' %}selected{% endif %}>금천구</option>
+                    <option value='Yeongdeungpo-gu' {% if category_local == 'Yeongdeungpo-gu' %}selected{% endif %}>영등포구</option>
+                    <option value='Gwanak-gu' {% if category_local == 'Gwanak-gu' %}selected{% endif %}>관악구</option>
+                    <option value='Seocho-gu' {% if category_local == 'Seocho-gu' %}selected{% endif %}>서초구</option>
+                    <option value='Gangnam-gu' {% if category_local == 'Gangnam-gu' %}selected{% endif %}>강남구</option>
+                    <option value='Songpa-gu' {% if category_local == 'Songpa-gu' %}selected{% endif %}>송파구</option>
+                    <option value='Gangdong-gu' {% if category_local == 'Gangdong-gu' %}selected{% endif %}>강동구</option>
+                </select>
+            </div> <!-- 지역별 정렬조건 끝 -->
+    
+            <div class='col-2'> <!-- 업종별 정렬조건 시작-->
+                <select class='form-control category_sectors'>
+                    <option value='' {% if category_sectors == '' %}selected{% endif %}> --업종별--</option>
+                    <option value='conduct' {% if category_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
+                    <option value='marketing' {% if category_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
+                    <option value='IT' {% if category_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>
+                    <option value='design' {% if category_sectors == 'design' %}selected{% endif %}>디자인</option>
+                    <option value='circulation' {% if category_sectors == 'circulation' %}selected{% endif %}>무역·유통</option>
+                    <option value='sales' {% if category_sectors == 'sales' %}selected{% endif %}>영업·고객상담</option>
+                    <option value='service' {% if category_sectors == 'service' %}selected{% endif %}>서비스</option>
+                    <option value='R&D' {% if category_sectors == 'R&D' %}selected{% endif %}>연구개발·설계</option>
+                    <option value='production' {% if category_sectors == 'production' %}selected{% endif %}>생산·제조</option>
+                    <option value='education' {% if category_sectors == 'education' %}selected{% endif %}>교육</option>
+                    <option value='erection' {% if category_sectors == 'erection' %}selected{% endif %}>건설</option>
+                    <option value='medical' {% if category_sectors == 'medical' %}selected{% endif %}>의료</option>
+                    <option value='media' {% if category_sectors == 'media' %}selected{% endif %}>미디어</option>
+                    <option value='specialty' {% if category_sectors == 'specialty' %}selected{% endif %}>전문 특수직</option>
+                </select>
+            </div> <!-- 업종별 정렬조건 끝 -->
+        </div> 
+    
+        <!--- 제목부분(만약 아무것도 입력안할시 None이 아니라 공백으로) --->
+        <div class='form-group'>
+            <label for='subject'>제목</label>
+            <input type='text' class='form-control' name='subject' id='subject' value='{{ form.subject.value|default_if_none:"" }}'>
+        </div>
+
+        <!--- 내용부분(만약 아무것도 입력안할시 None이 아니라 공백으로) --->
+        <div class='form-group'>
+            <label for='content'>내용</label>
+            <textarea class='form-control' name='content' id='content' rows='10'>{{ form.content.value|default_if_none:"" }}</textarea>
+        </div>
+        <button type='submit' class='btn btn-primary'> 저장하기 </button>
+    </form>
+</div>
+{% endblock %}
+<!--- base.html 내부 구협부분 끝 --->

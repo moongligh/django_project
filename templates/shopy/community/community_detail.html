@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container my-3"> <!-- html 포멧 작성 시작 -->
+        
+        {% if messages %} <!-- 사용자오류 표시 -->
+            <div class="alert alert-danger my-3" role="alert">
+                {% for message in messages %}
+                    <strong>{{ message.tags }}</strong>
+                    <ul><li>{{ message.message }}</li></ul>
+                {% endfor %}
+            </div>
+        {% endif %} <!-- 사용자오류 끝 -->
+
+        <!-- 질문 제목 -->
+        <h2 class="border-bottom py-2">{{ community.subject }}</h2>
+
+
+        <div class="row my-3">
+            <div class="col-1"> <!-- 본문글 추천영역 -->
+                <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{community.voter.count}}</div> <!-- 추천수 카운트 -->
+                <a href="#" data-uri="{% url 'shopy:vote_community' community.id  %}"class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a> <!-- 추천 버튼 -->
+            </div> <!-- 본문글 추천영역 끝 -->
+
+
+            <div class="col-11"> <!-- 본문영역 시작 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text" style="white-space: pre-line;">{{ community.content }}</div> <!-- 본문 내용 -->
+                        <div class="d-flex justify-content-end">
+
+                            {% if community.modify_date %}   <!-- 본문을 수정한적이 있을경우 시작 -->
+                                <div class="badge badge-light p-2 text-left mx-3">
+                                    <div class="mb-2">modified at</div>
+                                    <div>{{ community.modify_date }}</div>
+                                </div>
+                            {% endif %} <!-- 본문을 수정한적이 있을경우 끝-->
+
+                            <div class="badge badge-light p-2 text-left"> <!-- 본문 작성자 정보 시작 -->
+                                <div class="mb-2">{{ community.author.username }}</div>
+                                <div>{{ community.create_date }}</div>
+                            </div> <!-- 본문 작성자 정보 끝 -->
+                        </div>
+
+                        {% if request.user == community.author %} <!-- 사용자와 본문 작성자가 같을경우 버튼 활성화 시작 -->
+                            <div class="my-3">
+                                <a href="{% url 'shopy:community_modify' community.id  %}"class="btn btn-sm btn-outline-secondary">수정</a>
+                                <a href="#" class="delete btn btn-sm btn-outline-secondary"data-uri="{% url 'shopy:community_delete' community.id  %}">삭제</a>
+                            </div>
+                        {% endif %} <!-- 사용자와 본문 작성자가 같을경우 버튼 활성화 끝 -->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- 본문 영역 끝-->
+
+        <h5 class="border-bottom my-3 py-2">{{community.comment_set.count}}개의 댓글이 있습니다.</h5> <!-- 댓글 갯수 카운트 -->
+        {% for comment in community.comment_set.all %} <!-- 모든 댓글 보여주기 시작 -->
+            <a name='comment_{{ comment.id }}'></a> <!-- 댓글 앵커 생성 -->
+            <div class="row my-3">
+                <div class="col-11"> <!-- 댓글표시 영역 시작 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-text" style="white-space: pre-line;">{{ c.content }}</div>
+                                <div class="d-flex justify-content-end">
+
+                                    {% if comment.modify_date %} <!-- 댓글을 수정한적이 있는경우 시작 -->
+                                        <div class="badge badge-light p-2 text-left mx-3">
+                                            <div class="mb-2">modified at</div>
+                                            <div>{{ comment.modify_date }}</div>
+                                        </div>
+                                    {% endif %} <!-- 댓글을 수정한적이 있는경우 끝 -->
+
+                                    <div class="badge badge-light p-2 text-left"> <!-- 댓글 작성자 정보 시작-->
+                                        <div class="mb-2">{{ comment.author.username }}</div>
+                                        <div>{{ comment.create_date }}</div>
+                                    </div> <!-- 댓글 작성자 정보 끝 -->
+                                </div>
+                            {% if request.user == comment.author %} <!-- 사용자와 댓글 작성자가 같을경우 버튼 활성화 시작 -->
+                                <div class="my-3">
+                                    <a href="{% url 'shopy:comment_modify' comment.id  %}"class="btn btn-sm btn-outline-secondary">수정</a>
+                                    <a href="#" class="delete btn btn-sm btn-outline-secondary "data-uri="{% url 'shopy:comment_delete' comment.id  %}">삭제</a>
+                                </div>
+                            {% endif %} <!-- 사용자와 댓글 작성자가 같을경우 버튼 활성화 시작 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %} <!-- 모든 댓글 보여주기 끝 -->
+
+
+        <form action="{% url 'shopy:comment_create' community.id %}" method="post" class="my-3"> <!-- 댓글 작성영역 시작 -->
+            {% csrf_token %}
+
+            {% if form.errors %} <!-- 댓글작성 영역 에러 시작-->
+                <div class="alert alert-danger" role="alert">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <strong>{{ field.label }}</strong>
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %} <!-- 댓글작성 영역 에러 끝 -->
+
+            <div class="form-group"> <!-- 댓글작성 textarea 활성화/비활성화 시작-->
+                <textarea {% if not user.is_authenticated %}disabled{% endif %} name="content" id="content" class="form-control" rows="10"> {% if not user.is_authenticated %} 로그인 후 이용해주세요. {% endif %} </textarea>
+            </div> <!-- 댓글작성 textarea 활성화/비활성화 끝-->
+
+            <input type="submit" value="댓글등록" class="btn btn-primary">
+        </form> <!-- 댓글 작성영역 끝 -->
+    </div> <!-- html 포멧 작성 끝 -->
+
+<!-- 스크립트 코드 -->
+{% endblock %}
+    {% block script %}
+    <script type='text/javascript'>
+    $(document).ready(function(){
+        // 삭제팝업 스크립트
+        $(".delete").on('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+        });
+
+        // 추천팝업 스크립트
+        $(".recommend").on('click', function() {
+            if(confirm("정말로 추천하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+        });
+    });
+    </script>
+{% endblock %}
