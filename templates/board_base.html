@@ -112,14 +112,14 @@
                     $("#searchForm").submit();
                 });
     
-                $(".sort_local").on('change', function(){    /* 지역별정렬 스크립트 */
-                    $("#sort_local").val($(this).val());
+                $(".category_local").on('change', function(){    /* 지역별정렬 스크립트 */
+                    $("#category_local").val($(this).val());
                     $("#page").val(1);
                     $("#searchForm").submit();
                 });
     
-                $(".sort_sectors").on('change', function(){    /* 산업별정렬 스크립트 */
-                    $("#sort_sectors").val($(this).val());
+                $(".category_sectors").on('change', function(){    /* 산업별정렬 스크립트 */
+                    $("#category_sectors").val($(this).val());
                     $("#page").val(1);
                     $("#searchForm").submit();
                 });
@@ -127,7 +127,6 @@
         </script>
         <!-- 글정렬 스크립트 끝 -->
 
-        <!-- 자바스크립트 부분 -->
         {% block script %}
         {% endblock %}
     </body>
