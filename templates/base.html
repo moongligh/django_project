@@ -19,11 +19,9 @@
         <!--- 네비게이션 바 부분 include --->
         {% include 'navbar.html' %}
 
-        <div class="container my-3">
-            <!--- 상속받는 템플릿의 구현부분--->
-            {% block content %}
-            {% endblock %}
-        </div>
+        <!--- 상속받는 템플릿의 구현부분--->
+        {% block content %}
+        {% endblock %}
 
         <!-- JQuery JS-->
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>

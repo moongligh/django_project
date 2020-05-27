@@ -29,7 +29,7 @@
 
                 <div class='col-2'> <!-- 지역별 정렬조건 시작-->
                     <select class='form-control category_local'>
-                        <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>
+                        <option value='default_local' {% if category_local == 'default_local' %}selected{% endif %}> --지역별--</option>
                         <option value='Gangnam-gu' {% if category_local == 'Gangnam-gu' %}selected{% endif %}>강남구</option>
                         <option value='Gangdong-gu' {% if category_local == 'Gangdong-gu' %}selected{% endif %}>강동구</option>
                         <option value='Gangbuk-gu' {% if category_local == 'Gangbuk-gu' %}selected{% endif %}>강북구</option>
@@ -60,7 +60,7 @@
 
                 <div class='col-2'> <!-- 업종별 정렬조건 시작-->
                     <select class='form-control cartegory_sectors'>
-                        <option value='' {% if cartegory_sectors == '' %}selected{% endif %}> --업종별--</option>
+                        <option value='default_sectors' {% if cartegory_sectors == 'default_sectors' %}selected{% endif %}> --업종별--</option>
                         <option value='conduct' {% if cartegory_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
                         <option value='marketing' {% if cartegory_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
                         <option value='IT' {% if cartegory_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>
@@ -88,6 +88,7 @@
             {% block content %}
             {% endblock %}
         </div>
+
         <!-- JQuery JS-->
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
         <!-- Bootstrap JS-->

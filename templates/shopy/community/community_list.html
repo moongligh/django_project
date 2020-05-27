@@ -2,6 +2,7 @@
 {% load shopy_filter %}
 {% block content %} <!-- base.html body내 구현부분 시작-->
     <!-- 화면 구성 부분 -->
+    <div class="container my-3">
         <table class="table">
             <thead>
                 <tr class="thead-dark text-center"><!-- 목록 상단부분 -->
@@ -16,8 +17,7 @@
                 {% if community_list %}
                     {% for community in community_list %} <!-- 등록된 질문수 만큼 반복하기 시작 -->
                         <tr class='text-center'>
-                            <!--- 게시판에 보여지는 글 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 --->
-                            <td>
+                            <td> <!--- 게시판에 보여지는 글 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 --->
                                 {{ community_list.paginator.count|sub:community_list.start_index|sub:forloop.counter0|add:1 }}
                             </td>
 
@@ -29,6 +29,10 @@
                                 {% if community.comment_set.count > 0 %}
                                     <span class='text-danger small ml-2'>{{ community.comment_set.count }}</span>
                                 {% endif %}
+
+                                <!-- 카테고리 표시부분 -->
+                                <span class="badge badge-pill badge-warning">{{ community.category_local }}</span>
+                                <span class="badge badge-pill badge-warning">{{ community.category_sectors }}</span>
                             </td>
                             
                             
@@ -102,6 +106,7 @@
         <!-- 페이징 처리 끝 -->
 
         <a href="{% url 'shopy:community_create' %}" class='btn btn-primary'> 글 작성하기 </a>
+    </div>
     <!-- 화면 구성부분 끝 -->
 
     <form id='searchForm' method='get' action='{% url "shopy:community_list" %}'> <!-- 폼생성 시작 -->
