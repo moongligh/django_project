@@ -56,8 +56,6 @@ def tipNknowhow_create(request):
         if form.is_valid():
             tipNknowhow = form.save(commit=False)
             tipNknowhow.author = request.user
-            tipNknowhow.category_local = request.category_local
-            tipNknowhow.category_sectors = request.category_sectors
             tipNknowhow.create_date = timezone.now()
             tipNknowhow.save()
             return redirect('shopy:tipNknowhow_list')

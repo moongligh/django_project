@@ -56,8 +56,6 @@ def QNA_create(request):
         if form.is_valid():
             QnA = form.save(commit=False)
             QnA.author = request.user
-            QnA.category_local = request.category_local
-            QnA.category_sectors = request.category_sectors
             QnA.create_date = timezone.now()
             QnA.save()
             return redirect('shopy:QNA_list')

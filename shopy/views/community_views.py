@@ -56,8 +56,6 @@ def community_create(request):
         if form.is_valid():
             community = form.save(commit=False)
             community.author = request.user
-            community.category_local = request.category_local
-            community.category_sectors = request.category_sectors
             community.create_date = timezone.now()
             community.save()
             return redirect('shopy:community_list')
