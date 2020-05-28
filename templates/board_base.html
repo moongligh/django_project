@@ -23,7 +23,7 @@
                     <select class='form-control sort_list'>
                         <option value='recent' {% if sort_list == 'recent' %}selected{% endif %}>최신순</option>
                         <option value='recommend' {% if sort_list == 'recommend' %}selected{% endif %}>추천순</option>
-                        <option value='popular' {% if sort_list == 'popular' %}selected{% endif %}>인기순</option>
+                        <option value='popular' {% if sort_list == 'popular' %}selected{% endif %}>댓글순</option>
                     </select>
                 </div> <!-- 글정렬조건 끝 -->
 
@@ -59,22 +59,22 @@
                 </div> <!-- 지역별 정렬조건 끝 -->
 
                 <div class='col-2'> <!-- 업종별 정렬조건 시작-->
-                    <select class='form-control cartegory_sectors'>
-                        <option value='default_sectors' {% if cartegory_sectors == 'default_sectors' %}selected{% endif %}> --업종별--</option>
-                        <option value='conduct' {% if cartegory_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
-                        <option value='marketing' {% if cartegory_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
-                        <option value='IT' {% if cartegory_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>
-                        <option value='design' {% if cartegory_sectors == 'design' %}selected{% endif %}>디자인</option>
-                        <option value='circulation' {% if cartegory_sectors == 'circulation' %}selected{% endif %}>무역·유통</option>
-                        <option value='sales' {% if cartegory_sectors == 'sales' %}selected{% endif %}>영업·고객상담</option>
-                        <option value='service' {% if cartegory_sectors == 'service' %}selected{% endif %}>서비스</option>
-                        <option value='R&D' {% if cartegory_sectors == 'R&D' %}selected{% endif %}>연구개발·설계</option>
-                        <option value='production' {% if cartegory_sectors == 'production' %}selected{% endif %}>생산·제조</option>
-                        <option value='education' {% if cartegory_sectors == 'education' %}selected{% endif %}>교육</option>
-                        <option value='erection' {% if cartegory_sectors == 'erection' %}selected{% endif %}>건설</option>
-                        <option value='medical' {% if cartegory_sectors == 'medical' %}selected{% endif %}>의료</option>
-                        <option value='media' {% if cartegory_sectors == 'media' %}selected{% endif %}>미디어</option>
-                        <option value='specialty' {% if cartegory_sectors == 'specialty' %}selected{% endif %}>전문 특수직</option>
+                    <select class='form-control category_sectors'>
+                        <option value='default_sectors' {% if category_sectors == 'default_sectors' %}selected{% endif %}> --업종별--</option>
+                        <option value='conduct' {% if category_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
+                        <option value='marketing' {% if category_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
+                        <option value='IT' {% if category_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>
+                        <option value='design' {% if category_sectors == 'design' %}selected{% endif %}>디자인</option>
+                        <option value='circulation' {% if category_sectors == 'circulation' %}selected{% endif %}>무역·유통</option>
+                        <option value='sales' {% if category_sectors == 'sales' %}selected{% endif %}>영업·고객상담</option>
+                        <option value='service' {% if category_sectors == 'service' %}selected{% endif %}>서비스</option>
+                        <option value='R&D' {% if category_sectors == 'R&D' %}selected{% endif %}>연구개발·설계</option>
+                        <option value='production' {% if category_sectors == 'production' %}selected{% endif %}>생산·제조</option>
+                        <option value='education' {% if category_sectors == 'education' %}selected{% endif %}>교육</option>
+                        <option value='erection' {% if category_sectors == 'erection' %}selected{% endif %}>건설</option>
+                        <option value='medical' {% if category_sectors == 'medical' %}selected{% endif %}>의료</option>
+                        <option value='media' {% if category_sectors == 'media' %}selected{% endif %}>미디어</option>
+                        <option value='specialty' {% if category_sectors == 'specialty' %}selected{% endif %}>전문 특수직</option>
                     </select>
                 </div> <!-- 업종별 정렬조건 끝 -->
 
@@ -108,7 +108,7 @@
                     $("#searchForm").submit();
                 });
     
-                $(".sort_list").on('change', function(){    /* 글정렬 스크립트 */
+                $(".sort_list").on('change', function(){    /* 조건글정렬 스크립트 */
                     $("#sort_list").val($(this).val());
                     $("#page").val(1);
                     $("#searchForm").submit();

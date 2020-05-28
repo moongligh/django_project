@@ -3,7 +3,7 @@
 {% block content %} <!-- base.html body내 구현부분 시작-->
     <!-- 화면 구성 부분 -->
     <div class="container my-3">
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr class="thead-dark text-center"><!-- 목록 상단부분 -->
                     <th>번호</th>
@@ -26,7 +26,7 @@
                             <td class='text-left'>
                                 <a href="{% url 'shopy:QNA_detail' QnA.id %}">{{ QnA.subject }}</a>
                                 
-                                <!--- 답변갯수 표시부분 --->
+                                <!--- 댓글갯수 표시부분 --->
                                 {% if QnA.comment_set.count > 0 %}
                                     <span class='text-danger small ml-2'>{{ QnA.comment_set.count }}</span>
                                 {% endif %}
@@ -38,8 +38,8 @@
                             
                             
                             <td> <!-- 추천수 시작 -->
-                                {% if QNA.voter.all.count > 0 %}
-                                    <span class="badge badge-warning px-2 py-1">{{ QnA.voter.all.count }}</span>
+                                {% if QnA.voter.all.count > 0 %}
+                                    <span class="badge badge-primary px-2 py-1">{{ QnA.voter.all.count }}</span>
                                 {% endif %}
                             </td> <!-- 추천수 끝 -->
 
@@ -115,7 +115,7 @@
         <input type='hidden' id='page' name='page' value='{{ page }}'>
         <input type='hidden' id='sort_list' name='sort_list' value='{{ sort_list }}'>
         <input type='hidden' id='category_local' name='category_local' value='{{ category_local }}'>
-        <input type='hidden' id='categort_sectors' name='category_sectors' value='{{ category_sectors }}'>
+        <input type='hidden' id='category_sectors' name='category_sectors' value='{{ category_sectors }}'>
     </form> <!-- 폼생성 끝 -->
 
 {% endblock %} <!-- board_base.html내 구현부분 끝-->

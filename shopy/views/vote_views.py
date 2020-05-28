@@ -19,7 +19,7 @@ def vote_community(request, community_id):
 
 # QNA글 추천 함수
 @login_required(login_url='common:login')
-def vote_QNA(request, QNA_id):
+def vote_QNA(request, QnA_id):
     '''
     shopy QNA글 추천등록
     '''
@@ -28,7 +28,7 @@ def vote_QNA(request, QNA_id):
         messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
     else:
         QnA.voter.add(request.user)
-    return redirect('shopy:QNA_detail', QNA_id=QnA.id)
+    return redirect('shopy:QNA_detail', QnA_id=QnA.id)
 
 # 팁과 노하우글 추천 함수
 @login_required(login_url='common:login')
