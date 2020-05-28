@@ -160,7 +160,7 @@ def community_detail(request, community_id):
     '''
     community = get_object_or_404(Community, pk=community_id)
     context = {'community': community}
-    return render(request, 'shop/community/community_detail.html', context)
+    return render(request, 'shopy/community/community_detail.html', context)
 
 # 커뮤니티 글 수정하기 함수
 @login_required(login_url='common:login')
@@ -181,8 +181,6 @@ def community_modify(request, community_id):
         if form.is_valid():
             community = form.save(commit=False)
             community.author = request.user
-            community.category_local = request.category_local
-            community.category_sectors = request.category_sectors
             community.modify_date = timezone.now()
             community.save()
             return redirect('shopy:community_detail', community_id = community.id)
@@ -198,7 +196,7 @@ def community_delete(request, community_id):
     '''
     shopy 커뮤니티 글 삭제
     '''
-    community = get_object_or_404(Community, pk=community)
+    community = get_object_or_404(Community, pk=community_id)
     if request.user != community.author:
         messages.error(request, '삭제권한이 없습니다!')
         return redirect('shopy:community_detail', community_id=community.id)

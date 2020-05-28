@@ -59,7 +59,7 @@
                 <div class="col-11"> <!-- 댓글표시 영역 시작 -->
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-text" style="white-space: pre-line;">{{ c.content }}</div>
+                            <div class="card-text" style="white-space: pre-line;">{{ comment.content }}</div>
                                 <div class="d-flex justify-content-end">
 
                                     {% if comment.modify_date %} <!-- 댓글을 수정한적이 있는경우 시작 -->
@@ -76,8 +76,8 @@
                                 </div>
                             {% if request.user == comment.author %} <!-- 사용자와 댓글 작성자가 같을경우 버튼 활성화 시작 -->
                                 <div class="my-3">
-                                    <a href="{% url 'shopy:comment_modify' comment.id  %}"class="btn btn-sm btn-outline-secondary">수정</a>
-                                    <a href="#" class="delete btn btn-sm btn-outline-secondary "data-uri="{% url 'shopy:comment_delete' comment.id  %}">삭제</a>
+                                    <a href="{% url 'shopy:comment_modify_tipNknowhow' comment.id  %}"class="btn btn-sm btn-outline-secondary">수정</a>
+                                    <a href="#" class="delete btn btn-sm btn-outline-secondary "data-uri="{% url 'shopy:comment_delete_tipNknowhow' comment.id  %}">삭제</a>
                                 </div>
                             {% endif %} <!-- 사용자와 댓글 작성자가 같을경우 버튼 활성화 시작 -->
                         </div>
@@ -87,7 +87,7 @@
         {% endfor %} <!-- 모든 댓글 보여주기 끝 -->
 
 
-        <form action="{% url 'shopy:comment_create' tipNknowhow.id %}" method="post" class="my-3"> <!-- 댓글 작성영역 시작 -->
+        <form action="{% url 'shopy:comment_create_tipNknowhow' tipNknowhow.id %}" method="post" class="my-3"> <!-- 댓글 작성영역 시작 -->
             {% csrf_token %}
 
             {% if form.errors %} <!-- 댓글작성 영역 에러 시작-->

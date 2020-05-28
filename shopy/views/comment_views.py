@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
 
 from ..forms import CommentForm
-from ..models import Community, QNA, TipNknowhow
+from ..models import Community, QNA, TipNknowhow, Comment
 
 # 커뮤니티글 댓글 작성하기 함수
 @login_required(login_url='common:login')
@@ -50,7 +50,7 @@ def comment_modify_community(request, comment_id):
             comment.modify_date = timezone.now()
             comment.save()
             return redirect('{}#comment_{}'.format(
-                resolve_url('shopy:community_detail', community_id=comment.community.id), community.id))
+                resolve_url('shopy:community_detail', community_id=comment.community.id), comment.id))
     else:
         form = CommentForm(instance=comment)
     context = {'form': form}
@@ -72,7 +72,7 @@ def comment_delete_community(request, comment_id):
     # 댓글 작성자일 경우
     else:
         comment.delete()
-    return redirect('shopy:community_comment', community_id = comment.community.id)
+    return redirect('shopy:community_detail', community_id = comment.community.id)
 
 # QNA글 댓글 작성하기 함수
 @login_required(login_url='common:login')
@@ -90,7 +90,7 @@ def comment_create_QNA(request, QnA_id):
             comment.QnA = QnA
             comment.save()
             return redirect('{}#comment_{}'.format(
-                resolve_url('shopy:QnA_detail', QnA_id = comment.QnA.id), QnA.id))
+                resolve_url('shopy:QNA_detail', QnA_id = comment.QnA.id), QnA.id))
     else:
         form = CommentForm()
     context = {'form': form}
@@ -118,7 +118,7 @@ def comment_modify_QNA(request, comment_id):
             comment.modify_date = timezone.now()
             comment.save()
             return redirect('{}#comment_{}'.format(
-                resolve_url('shopy:QNA_detail', QnA_id=comment.QnA.id), QnA.id))
+                resolve_url('shopy:QNA_detail', QnA_id=comment.QnA.id), comment.id))
     else:
         form = CommentForm(instance=comment)
     context = {'form': form}
@@ -140,7 +140,7 @@ def comment_delete_QNA(request, comment_id):
     # 댓글 작성자일 경우
     else:
         comment.delete()
-    return redirect('shopy:QNA_comment', QnA_id = comment.QnA.id)
+    return redirect('shopy:QNA_detail', QnA_id = comment.QnA.id)
 
 # 팁과 노하우글 댓글 작성하기 함수
 @login_required(login_url='common:login')
@@ -186,7 +186,7 @@ def comment_modify_tipNknowhow(request, comment_id):
             comment.modify_date = timezone.now()
             comment.save()
             return redirect('{}#comment_{}'.format(
-                resolve_url('shopy:tipNknowhow_detail', tipNknowhow_id=comment.tipNknowhow.id), tipNknowhow.id))
+                resolve_url('shopy:tipNknowhow_detail', tipNknowhow_id=comment.tipNknowhow.id), comment.id))
     else:
         form = CommentForm(instance=comment)
     context = {'form': form}
@@ -208,4 +208,4 @@ def comment_delete_tipNknowhow(request, comment_id):
     # 댓글 작성자일 경우
     else:
         comment.delete()
-    return redirect('shopy:tipNknowhow_comment', tipNknowhow_id = comment.tipNknowhow.id)
+    return redirect('shopy:tipNknowhow_detail', tipNknowhow_id = comment.tipNknowhow.id)

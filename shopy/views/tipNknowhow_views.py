@@ -27,7 +27,7 @@ def tipNknowhow_list(request):
         tipNknowhow_list = TipNknowhow.objects.annotate(num_comment=Count('comment')).order_by('-num_comment', '-create_date')
     else:   #recent
         tipNknowhow_list = TipNknowhow.objects.order_by('-create_date')
-
+    
     # 지역별 카테고리 정렬
     if category_local == 'Gangnam-gu':
         tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gangnam-gu').order_by('-create_date')
@@ -81,7 +81,6 @@ def tipNknowhow_list(request):
         tipNknowhow_list = TipNknowhow.objects.filter(category_local='Jungnang-gu').order_by('-create_date')
     else: # category_local == default_local
         tipNknowhow_list = TipNknowhow.objects.order_by('-create_date')
-
     
     # 산업별 카테고리 정렬
     if category_sectors == 'conduct':
@@ -149,9 +148,9 @@ def tipNknowhow_create(request):
             tipNknowhow.save()
             return redirect('shopy:tipNknowhow_list')
     else:
-        form = CommunityForm()
+        form = TipNknowhowForm()
     context = {'form': form}
-    return render(request, 'shopy/community/community_form.html', context)
+    return render(request, 'shopy/tipNknowhow/tipNknowhow_form.html', context)
 
 # 팁과 노하우 글 상세보기 함수
 def tipNknowhow_detail(request, tipNknowhow_id):
@@ -160,7 +159,7 @@ def tipNknowhow_detail(request, tipNknowhow_id):
     '''
     tipNknowhow = get_object_or_404(TipNknowhow, pk=tipNknowhow_id)
     context = {'tipNknowhow': tipNknowhow}
-    return render(request, 'shop/tipNknowhow/tipNknowhow_detail.html', context)
+    return render(request, 'shopy/tipNknowhow/tipNknowhow_detail.html', context)
 
 # 팁과 노하우 글 수정하기 함수
 @login_required(login_url='common:login')
@@ -181,8 +180,6 @@ def tipNknowhow_modify(request, tipNknowhow_id):
         if form.is_valid():
             tipNknowhow = form.save(commit=False)
             tipNknowhow.author = request.user
-            tipNknowhow.category_local = request.category_local
-            tipNknowhow.category_sectors = request.category_sectors
             tipNknowhow.modify_date = timezone.now()
             tipNknowhow.save()
             return redirect('shopy:tipNknowhow_detail', tipNknowhow_id = tipNknowhow.id)
@@ -198,7 +195,7 @@ def tipNknowhow_delete(request, tipNknowhow_id):
     '''
     shopy 팁과 노하우 글 삭제
     '''
-    tipNknowhow = get_object_or_404(TipNknowhow, pk=tipNknowhow)
+    tipNknowhow = get_object_or_404(TipNknowhow, pk=tipNknowhow_id)
     if request.user != tipNknowhow.author:
         messages.error(request, '삭제권한이 없습니다!')
         return redirect('shopy:tipNknowhow_detail', tipNknowhow_id=tipNknowhow.id)

@@ -53,5 +53,5 @@ class Comment(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     community = models.ForeignKey(Community, on_delete= models.CASCADE, null=True, blank=True)
-    QNA = models.ForeignKey(QNA, on_delete= models.CASCADE, null=True, blank=True)
+    QnA = models.ForeignKey(QNA, on_delete= models.CASCADE, null=True, blank=True)
     tipNknowhow = models.ForeignKey(TipNknowhow, on_delete= models.CASCADE, null=True, blank=True)

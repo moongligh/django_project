@@ -23,7 +23,7 @@
 
         <div class='row my-3 from-group'>
             <div class='col-2'> <!-- 지역별 정렬조건 시작-->
-                <select class='form-control category_local'>
+                <select class='form-control category_local' name='category_local' id='category_local'>
                     <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>
                     <option value='Gangnam-gu' {% if category_local == 'Gangnam-gu' %}selected{% endif %}>강남구</option>
                     <option value='Gangdong-gu' {% if category_local == 'Gangdong-gu' %}selected{% endif %}>강동구</option>
@@ -54,7 +54,7 @@
             </div> <!-- 지역별 정렬조건 끝 -->
     
             <div class='col-2'> <!-- 업종별 정렬조건 시작-->
-                <select class='form-control category_sectors'>
+                <select class='form-control category_sectors' name='category_sectors' id='category_sectors'>
                     <option value='' {% if category_sectors == '' %}selected{% endif %}> --업종별--</option>
                     <option value='conduct' {% if category_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
                     <option value='marketing' {% if category_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>

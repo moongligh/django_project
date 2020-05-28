@@ -24,31 +24,31 @@
 
                             <!--- 글 제목 --->
                             <td class='text-left'>
-                                <a href="{% url 'shopy:QNA_detail' QnA.id %}">{{ QNA.subject }}</a>
+                                <a href="{% url 'shopy:QNA_detail' QnA.id %}">{{ QnA.subject }}</a>
                                 
                                 <!--- 답변갯수 표시부분 --->
                                 {% if QnA.comment_set.count > 0 %}
-                                    <span class='text-danger small ml-2'>{{ QNA.comment_set.count }}</span>
+                                    <span class='text-danger small ml-2'>{{ QnA.comment_set.count }}</span>
                                 {% endif %}
 
                                 <!-- 카테고리 표시부분 -->
-                                <span class="badge badge-pill badge-warning">{{ community.category_local }}</span>
-                                <span class="badge badge-pill badge-warning">{{ community.category_sectors }}</span>
+                                <span class="badge badge-pill badge-warning">{{ QnA.category_local }}</span>
+                                <span class="badge badge-pill badge-warning">{{ QnA.category_sectors }}</span>
                             </td>
                             
                             
                             <td> <!-- 추천수 시작 -->
                                 {% if QNA.voter.all.count > 0 %}
-                                    <span class="badge badge-warning px-2 py-1">{{ QNA.voter.all.count }}</span>
+                                    <span class="badge badge-warning px-2 py-1">{{ QnA.voter.all.count }}</span>
                                 {% endif %}
                             </td> <!-- 추천수 끝 -->
 
                             <td>
-                                {{ QNA.author.username }} <!--- 글 작성자 --->
+                                {{ QnA.author.username }} <!--- 글 작성자 --->
                             </td>
 
                             <td>
-                                {{ QNA.create_date }} <!--- 글 생성일 --->
+                                {{ QnA.create_date }} <!--- 글 생성일 --->
                             </td>
                         </tr>
                     {% endfor %} <!-- 등록된 게시글 수 만큼 반복하기 끝 -->
@@ -76,7 +76,7 @@
 
             <!--- 페이지리스트부분 시작 --->
             {% for page_number in QnA_list.paginator.page_range %} <!--- 페이지 넘버만큼 반복for --->
-                {% if page_number >= QnA_list.number|add:-5 and page_number <= QnA_list.number|add:5 %} <!--- 현재 community_list.number 기준으로 5만큼 작은것부터 5만큼 큰 페이지넘버 보여주기 --->
+                {% if page_number >= QnA_list.number|add:-5 and page_number <= QnA_list.number|add:5 %} <!--- 현재 QnA_list.number 기준으로 5만큼 작은것부터 5만큼 큰 페이지넘버 보여주기 --->
                     {% if page_number == QnA_list.number %} <!-- 페이지넘버와 페이지 리스트의 글번호가 같을경우  -->
                         <li class='page-item active' aria-current='page'>
                             <a class='page-link' data-page='{{ page_number }}' href='#'>

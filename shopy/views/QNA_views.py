@@ -181,8 +181,6 @@ def QNA_modify(request, QnA_id):
         if form.is_valid():
             QnA = form.save(commit=False)
             QnA.author = request.user
-            QnA.category_local = request.category_local
-            QnA.category_sectors = request.category_sectors
             QnA.modify_date = timezone.now()
             QnA.save()
             return redirect('shopy:QNA_detail', QnA_id = QnA.id)
@@ -197,7 +195,7 @@ def QNA_delete(request, QnA_id):
     '''
     shopy QNA 글 삭제
     '''
-    QnA = get_object_or_404(QNA, pk=QnA)
+    QnA = get_object_or_404(QNA, pk=QnA_id)
     if request.user != QnA.author:
         messages.error(request, '삭제권한이 없습니다!')
         return redirect('shopy:QNA_detail', QnA_id=QnA.id)

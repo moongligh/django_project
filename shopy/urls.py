@@ -10,21 +10,21 @@ urlpatterns = [
     # community_views.py
     path('community/list/', community_views.community_list, name='community_list'),
     path('community/create/', community_views.community_create, name='community_create'),
-    path('<int:community_id>/', community_views.community_detail, name='community_detail'),
+    path('community/detail/<int:community_id>/', community_views.community_detail, name='community_detail'),
     path('community/modify/<int:community_id>/', community_views.community_modify, name='community_modify'),
     path('community/delete/<int:community_id>/', community_views.community_delete, name='community_delete'),
 
     # QNA_views.py
     path('QNA/list/', QNA_views.QNA_list, name='QNA_list'),
     path('QNA/create/', QNA_views.QNA_create, name='QNA_create'),
-    path('<int:QnA_id>/', QNA_views.QNA_detail, name='QNA_detail'),
+    path('QNA/detail/<int:QnA_id>/', QNA_views.QNA_detail, name='QNA_detail'),
     path('QNA/modify/<int:QnA_id>/', QNA_views.QNA_modify, name='QNA_modify'),
     path('QNA/delete/<int:QnA_id>/', QNA_views.QNA_delete, name='QNA_delete'),
 
     # tipNknowhow_views.py
     path('tipNknowhow/list/', tipNknowhow_views.tipNknowhow_list, name='tipNknowhow_list'),
     path('tipNknowhow/create/', tipNknowhow_views.tipNknowhow_create, name='tipNknowhow_create'),
-    path('<int:tipNknowhow_id>/', tipNknowhow_views.tipNknowhow_detail, name='tipNknowhow_detail'),
+    path('tipNknowhow/detail<int:tipNknowhow_id>/', tipNknowhow_views.tipNknowhow_detail, name='tipNknowhow_detail'),
     path('tipNknowhow/modify/<int:tipNknowhow_id>/', tipNknowhow_views.tipNknowhow_modify, name='tipNknowhow_modify'),
     path('tipNknowhow/delete/<int:tipNknowhow_id>/', tipNknowhow_views.tipNknowhow_delete, name='tipNknowhow_delete'),
 
@@ -34,7 +34,7 @@ urlpatterns = [
     path('comment/modify/community/<int:comment_id>/', comment_views.comment_modify_community, name='comment_modify_community'),
     path('comment/delete/community/<int:comment_id>/', comment_views.comment_delete_community, name='comment_delete_community'),
         # QNA 댓글
-    path('comment/create/QNA/<int:QNA_id>/', comment_views.comment_create_QNA, name='comment_create_QNA'),
+    path('comment/create/QNA/<int:QnA_id>/', comment_views.comment_create_QNA, name='comment_create_QNA'),
     path('comment/modify/QNA/<int:comment_id>/', comment_views.comment_modify_QNA, name='comment_modify_QNA'),
     path('comment/delete/QNA/<int:comment_id>/', comment_views.comment_delete_QNA, name='comment_delete_QNA'),
         # 팁과 노하우 댓글
@@ -43,7 +43,7 @@ urlpatterns = [
     path('comment/delete/tipNknowhow/<int:comment_id>/', comment_views.comment_delete_tipNknowhow, name='comment_delete_tipNknowhow'),
 
     # vote_views.py
-    path('vote/community/<int:question_id>/', vote_views.vote_community, name='vote_question'),
-    path('vote/QNA/<int:QNA_id>/', vote_views.vote_QNA, name='vote_QNA'),
+    path('vote/community/<int:community_id>/', vote_views.vote_community, name='vote_community'),
+    path('vote/QNA/<int:QnA_id>/', vote_views.vote_QNA, name='vote_QNA'),
     path('vote/tipNknowhow/<int:tipNknowhow_id>/', vote_views.vote_tipNknowhow, name='vote_tipNknowhow'),
 ]
