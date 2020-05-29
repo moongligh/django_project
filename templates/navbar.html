@@ -1,37 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <a class="navbar-brand nav-link btn" href="{% url 'shopy:home' %}">Shopy</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbar_content">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto"> <!-- 좌측 네비게이션 버튼 부분 -->
         <li class="nav-item active">
-          <a class="nav-link btn" href="{% url 'shopy:community_list' %}">커뮤니티<span class="sr-only"></a>
+          <a class="nav-link btn btn-lg" href="{% url 'shopy:community_list' %}">커뮤니티<span class="sr-only"></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link btn" href="{% url 'shopy:QNA_list' %}">Q&A<span class="sr-only"></a>
+          <a class="nav-link btn btn-lg" href="{% url 'shopy:QNA_list' %}">Q&A<span class="sr-only"></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link btn" href="{% url 'shopy:tipNknowhow_list' %}">팁과 노하우<span class="sr-only"></a>
+          <a class="nav-link btn btn-lg" href="{% url 'shopy:tipNknowhow_list' %}">팁과 노하우<span class="sr-only"></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link btn" href="#">지금 우리지역은?<span class="sr-only"></a>
+          <a class="nav-link btn btn-lg" href="#">지금 우리지역은?<span class="sr-only"></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link btn" href="#">정부알림<span class="sr-only"></a>
+        <li class="nav-item">
+          <div class="dropdown active">  <!-- 드롭다운 버튼 (정부링크) -->
+            <a class="nav-link btn btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              지원기관 사이트
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item text-center" href="https://www.mss.go.kr/site/smba/main.do" target='_blank'>중소벤처기업부</a>  
+              <a class="dropdown-item text-center" href="https://www.fsc.go.kr/" target='_blank'>금융위원회</a>
+              <a class="dropdown-item text-center" href="https://www.gov.kr/portal/" target='_blank'>정부24</a>
+            </div>
+          </div>  <!-- 드롭다운 버튼 끝 -->
         </li>
-      </ul>
+      </ul><!-- 좌측 네비게이션 버튼 끝 -->
 
         {% if user.is_authenticated %}
-        <div class="dropdown">
-          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{user.username}}님
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="{% url 'common:logout' %}">로그아웃</a>
-          </div>
-        </div>
+        <form class="form-inline" ></form>
+        <a class="nav-link btn btn-primary" href="{% url 'common:logout' %}">{{ user.username }} 로그아웃</a>
+      </form>
         {% else %}<!-- 비로그인 상태일시 -->
         <form class="form-inline" ></form>
         <a class="nav-link btn btn-primary" href="{% url 'common:login' %}"> 로그인</a>

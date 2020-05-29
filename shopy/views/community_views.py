@@ -18,7 +18,7 @@ def community_list(request):
     kw = request.GET.get('kw', '') # 검색어
     sort_list = request.GET.get('sort_list', 'recent') # 글정렬
     category_local = request.GET.get('category_local', 'default_local') # 지역별 정렬
-    category_sectors = request.GET.get('category_sectors', 'default_local') # 산업별 정렬
+    category_sectors = request.GET.get('category_sectors', 'default_sectors') # 산업별 정렬
 
     # 글정렬
     if sort_list == 'recommend':
@@ -121,9 +121,7 @@ def community_list(request):
             Q(subject__icontains=kw) |  # 제목검색
             Q(content__icontains=kw) |  # 내용검색
             Q(author__username__icontains=kw) |  # 질문 글쓴이검색
-            Q(comment__author__username__icontains=kw) |  # 답변 글쓴이검색
-            Q(category_local__icontains=kw) | # 글작성 카테고리(지역)
-            Q(category_sectors__icontains=kw) # 글작성 카테고리(산업)
+            Q(comment__author__username__icontains=kw)   # 답변 글쓴이검색
         ).distinct()
 
     # 페이징처리

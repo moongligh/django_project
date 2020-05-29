@@ -11,8 +11,10 @@
             </div>
         {% endif %} <!-- 사용자오류 끝 -->
 
-        <!-- 질문 제목 -->
-        <h2 class="border-bottom py-2">{{ community.subject }}</h2>
+        <h2 class="border-bottom py-2">{{ community.subject }}  <!-- 커뮤니티글 제목 -->
+            &nbsp; <span class="badge badge-pill badge-warning">{{ community.category_local }}</span>
+            &nbsp; <span class="badge badge-pill badge-warning">{{ community.category_sectors }}</span>
+        </h2>
 
 
         <div class="row my-3">

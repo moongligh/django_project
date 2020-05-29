@@ -42,7 +42,7 @@ urlpatterns = [
     path('comment/modify/tipNknowhow/<int:comment_id>/', comment_views.comment_modify_tipNknowhow, name='comment_modify_tipNknowhow'),
     path('comment/delete/tipNknowhow/<int:comment_id>/', comment_views.comment_delete_tipNknowhow, name='comment_delete_tipNknowhow'),
 
-    # vote_views.py
+    # vote_views.py (게시글 추천)
     path('vote/community/<int:community_id>/', vote_views.vote_community, name='vote_community'),
     path('vote/QNA/<int:QnA_id>/', vote_views.vote_QNA, name='vote_QNA'),
     path('vote/tipNknowhow/<int:tipNknowhow_id>/', vote_views.vote_tipNknowhow, name='vote_tipNknowhow'),

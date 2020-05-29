@@ -24,7 +24,7 @@
         <div class='row my-3 from-group'>
             <div class='col-2'> <!-- 지역별 정렬조건 시작-->
                 <select class='form-control category_local' name='category_local' id='category_local'>
-                    <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>
+                    <option value='' {% if category_local == '' %}selected{% endif %}> --지역별--</option>  <!-- 카테고리 선택 유도를 위해 value를 공백값지정 -->
                     <option value='Gangnam-gu' {% if category_local == 'Gangnam-gu' %}selected{% endif %}>강남구</option>
                     <option value='Gangdong-gu' {% if category_local == 'Gangdong-gu' %}selected{% endif %}>강동구</option>
                     <option value='Gangbuk-gu' {% if category_local == 'Gangbuk-gu' %}selected{% endif %}>강북구</option>
@@ -55,7 +55,7 @@
     
             <div class='col-2'> <!-- 업종별 정렬조건 시작-->
                 <select class='form-control category_sectors' name='category_sectors' id='category_sectors'>
-                    <option value='' {% if category_sectors == '' %}selected{% endif %}> --업종별--</option>
+                    <option value='' {% if category_sectors == '' %}selected{% endif %}> --업종별--</option>    <!-- 카테고리 선택 유도를 위해 value를 공백값지정 -->
                     <option value='conduct' {% if category_sectors == 'conduct' %}selected{% endif %}>경영·사무</option>
                     <option value='marketing' {% if category_sectors == 'marketing' %}selected{% endif %}>광고·마케팅·홍보</option>
                     <option value='IT' {% if category_sectors == 'IT' %}selected{% endif %}>IT·인터넷</option>

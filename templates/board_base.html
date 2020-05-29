@@ -19,6 +19,7 @@
         <div class="container my-3">
             <!--- 상속받는 템플릿의 구현부분--->
             <div class='row justify-content-between my-3'>
+
                 <div class='col-2'> <!-- 글정렬조건 시작-->
                     <select class='form-control sort_list'>
                         <option value='recent' {% if sort_list == 'recent' %}selected{% endif %}>최신순</option>
@@ -87,6 +88,7 @@
             </div> 
             {% block content %}
             {% endblock %}
+
         </div>
 
         <!-- JQuery JS-->
