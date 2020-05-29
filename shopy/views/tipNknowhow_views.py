@@ -19,100 +19,34 @@ def tipNknowhow_list(request):
     sort_list = request.GET.get('sort_list', 'recent') # 글정렬
     category_local = request.GET.get('category_local', 'default_local') # 지역별 정렬
     category_sectors = request.GET.get('category_sectors', 'default_sectors') # 산업별 정렬
+    tipNknowhow_list = TipNknowhow.objects.annotate(num_voter=Count('voter'), num_comment=Count('comment')).order_by('-num_voter', '-create_date') # 기본 글목록 리스트 생성
 
-    # 글정렬
+    # 지역별 카테고리 조건선택시 정렬
+    local_list = ['Gangnam-gu', 'Gangdong-gu', 'Gangbuk-gu', 'Gangseo-gu', 'Gwanak-gu', 'Gwangjin-gu', 'Guro-gu', 'Geumcheon-gu', 'Geumcheon-gu', 'Nowon-gu', 'Dobong-gu', 'Dongdaemun-gu',
+    'Dongjak-gu', 'Mapo-gu', 'Seodaemun-gu', 'Seocho-gu', 'Seongdong-gu', 'Songpa-gu', 'Yangcheon-gu', 'Yeongdeungpo-gu', 'Yongsan-gu', 'Eunpyeong-gu', 'Jongno-gu', 'Jung-gu', 'Jungnang-gu']
+
+    for local in local_list:
+        if category_local == local:
+            tipNknowhow_list = tipNknowhow_list.filter(category_local=local).order_by('-create_date')
+        else:
+            tipNknowhow_list = tipNknowhow_list.order_by('-create_date')
+            
+    # 산업별 카테고리 조건선택시 정렬
+    sector_list = ['conduct', 'marketing', 'IT', 'design', 'circulation', 'sales', 'service', 'R&D', 'production', 'erection', 'erection', 'medical', 'media', 'specialty']
+
+    for sector in sector_list:
+        if category_sectors == sector:
+            tipNknowhow_list = tipNknowhow_list.filter(category_sectors=sector).order_by('-create_date')
+        else:
+            tipNknowhow_list = tipNknowhow_list.order_by('-create_date')
+
+    # 글조건 선택시 정렬
     if sort_list == 'recommend':
-        tipNknowhow_list = TipNknowhow.objects.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
+        tipNknowhow_list = tipNknowhow_list.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
     elif sort_list == 'popular':
-        tipNknowhow_list = TipNknowhow.objects.annotate(num_comment=Count('comment')).order_by('-num_comment', '-create_date')
+        tipNknowhow_list = tipNknowhow_list.annotate(num_comment=Count('comment')).order_by('-num_comment', '-create_date')
     else:   #recent
-        tipNknowhow_list = TipNknowhow.objects.order_by('-create_date')
-    
-    # 지역별 카테고리 정렬
-    if category_local == 'Gangnam-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gangnam-gu').order_by('-create_date')
-    elif category_local == 'Gangdong-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gangdong-gu').order_by('-create_date')
-    elif category_local == 'Gangbuk-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gangbuk-gu').order_by('-create_date')
-    elif category_local == 'Gangseo-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gangseo-gu').order_by('-create_date')
-    elif category_local == 'Gwanak-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gwanak-gu').order_by('-create_date')
-    elif category_local == 'Gwangjin-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Gwangjin-gu').order_by('-create_date')
-    elif category_local == 'Guro-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Guro-gu').order_by('-create_date')
-    elif category_local == 'Geumcheon-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Geumcheon-gu').order_by('-create_date')
-    elif category_local == 'Nowon-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Nowon-gu').order_by('-create_date')
-    elif category_local == 'Dobong-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Dobong-gu').order_by('-create_date')
-    elif category_local == 'Dongdaemun-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Dongdaemun-gu').order_by('-create_date')
-    elif category_local == 'Dongjak-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Dongjak-gu').order_by('-create_date')
-    elif category_local == 'Mapo-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Mapo-gu').order_by('-create_date')
-    elif category_local == 'Seodaemun-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Seodaemun-gu').order_by('-create_date')
-    elif category_local == 'Seocho-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Seocho-gu').order_by('-create_date')
-    elif category_local == 'Seongdong-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Seongdong-gu').order_by('-create_date')
-    elif category_local == 'Seongbuk-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Seongbuk-gu').order_by('-create_date')
-    elif category_local == 'Songpa-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Songpa-gu').order_by('-create_date')
-    elif category_local == 'Yangcheon-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Yangcheon-gu').order_by('-create_date')
-    elif category_local == 'Yeongdeungpo-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Yeongdeungpo-gu').order_by('-create_date')
-    elif category_local == 'Yongsan-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Yongsan-gu').order_by('-create_date')
-    elif category_local == 'Eunpyeong-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Eunpyeong-gu').order_by('-create_date')
-    elif category_local == 'Jongno-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Jongno-gu').order_by('-create_date')
-    elif category_local == 'Jung-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Jung-gu').order_by('-create_date')
-    elif category_local == 'Jungnang-gu':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_local='Jungnang-gu').order_by('-create_date')
-    else: # category_local == default_local
-        tipNknowhow_list = TipNknowhow.objects.order_by('-create_date')
-    
-    # 산업별 카테고리 정렬
-    if category_sectors == 'conduct':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='conduct').order_by('-create_date')
-    elif category_sectors == 'marketing':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='marketing').order_by('-create_date')
-    elif category_sectors == 'IT':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='IT').order_by('-create_date')
-    elif category_sectors == 'design':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='design').order_by('-create_date')
-    elif category_sectors == 'circulation':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='circulation').order_by('-create_date')
-    elif category_sectors == 'sales':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='salesu').order_by('-create_date')
-    elif category_sectors == 'service':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='service').order_by('-create_date')
-    elif category_sectors == 'R&D':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='R&D').order_by('-create_date')
-    elif category_sectors == 'production':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='production').order_by('-create_date')
-    elif category_sectors == 'education':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='education').order_by('-create_date')
-    elif category_sectors == 'erection':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='erection').order_by('-create_date')
-    elif category_sectors == 'medical':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='medical').order_by('-create_date')
-    elif category_sectors == 'media':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='media').order_by('-create_date')
-    elif category_sectors == 'specialty':
-        tipNknowhow_list = TipNknowhow.objects.filter(category_sectors='specialty').order_by('-create_date')
-    else: # category_sectors == default_sectors
-        tipNknowhow_list = TipNknowhow.objects.order_by('-create_date')
+        tipNknowhow_list = tipNknowhow_list.order_by('-create_date')
 
     # 검색
     if kw:
