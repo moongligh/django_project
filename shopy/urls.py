@@ -4,8 +4,10 @@ from .views import base_views, community_views, QNA_views, tipNknowhow_views, co
 app_name = 'shopy'
 
 urlpatterns = [
+
     # base_views.py
     path('', base_views.home, name='home'),
+    path('our_local_is/', base_views.our_local_is, name='our_local_is'),
 
     # community_views.py
     path('community/list/', community_views.community_list, name='community_list'),

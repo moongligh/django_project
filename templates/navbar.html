@@ -16,12 +16,12 @@
           <a class="nav-link btn btn-lg" href="{% url 'shopy:tipNknowhow_list' %}">팁과 노하우<span class="sr-only"></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link btn btn-lg" href="#">지금 우리지역은?<span class="sr-only"></a>
+          <a class="nav-link btn btn-lg" href="{% url 'shopy:our_local_is' %}">우리지역은?<span class="sr-only"></a>
         </li>
         <li class="nav-item">
           <div class="dropdown active">  <!-- 드롭다운 버튼 (정부링크) -->
             <a class="nav-link btn btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              지원기관 사이트
+              관련기관 사이트
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item text-center" href="https://www.mss.go.kr/site/smba/main.do" target='_blank'>중소벤처기업부</a>  

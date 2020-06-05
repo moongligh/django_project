@@ -125,7 +125,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
 # 로그인 성공후 이동하는 URL 설정
 LOGIN_REDIRECT_URL = '/'
 # 로그아웃 성공후 이동하는 URL 설정
