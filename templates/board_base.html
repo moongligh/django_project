@@ -11,6 +11,18 @@
         <!-- Shopy CSS -->
         <link rel='stylesheet' type='text/css' href='{% static "style.css" %}'>
         <title>우리는 Shopy!</title>
+
+        <style>
+            footer {
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: whitesmoke;
+                color: steelblue;
+                padding: 15px;
+                position: absolute;
+              }       
+        </style>
     </head>
 
     <body>
@@ -88,8 +100,8 @@
             </div> 
             {% block content %}
             {% endblock %}
-
         </div>
+        {% include 'footer.html' %}
 
         <!-- JQuery JS-->
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
