@@ -7,7 +7,7 @@
             {% include 'form_errors.html' %}
             <div class='form-group'>
                 <label for='content'>댓글내용</label>
-                <textarea class='form-control' name='content' id='content' row='3'>{{ form.content.value|default_if_none:'' }}</textarea>
+                <textarea class='form-control' name='content' id='content' row='3' required>{{ form.content.value|default_if_none:'' }}</textarea>
             </div>
             <button type='submit' class='btn btn-primary'>저장하기</button>
         </form>
