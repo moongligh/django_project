@@ -75,17 +75,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+import Postgresql_settings
+import Mysql_settings
 
-DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.mysql', # mysql 엔진 설정
-        'NAME':'django', # 데이터베이스 이름
-        'USER':'root', # 데이터베이스 연결시 사용할 유저 이름
-        'PASSWORD':'zmdk21', # 유저 패스워드
-        'HOST':'localhost',
-        'PORT':''
-    } 
-}
+# DATABASES = Postgresql_settings.DATABASES   # Postgresql 데이터베이스 설정
+DATABASES = Mysql_settings.DATABASES  # Mysql 데이터베이스 설정
 
 
 # Password validation

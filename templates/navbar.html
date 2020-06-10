@@ -34,7 +34,7 @@
 
         {% if user.is_authenticated %}
         <form class="form-inline" ></form>
-        <a class="nav-link btn btn-primary" href="{% url 'common:logout' %}">{{ user.username }} 로그아웃</a>
+        <a class="nav-link btn btn-primary" href="{% url 'common:logout' %}">{{ user.username }}(님) 로그아웃</a>
       </form>
         {% else %}<!-- 비로그인 상태일시 -->
         <form class="form-inline" ></form>
