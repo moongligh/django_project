@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
 <body id="page-top">
@@ -51,6 +53,7 @@
       </div>
     </div>
   </section>
-  
+
+  {% include 'footer.html' %}
 </body>
 {% endblock %}

@@ -102,7 +102,8 @@
                     {% endfor %}
                 </div>
             {% endif %} <!-- 댓글작성 영역 에러 끝 -->
-
+            
+            <h5 class="border-bottom my-3 py-2">댓글</h5>
             <div class="form-group"> <!-- 댓글작성 textarea 활성화/비활성화 시작-->
                 <textarea {% if not user.is_authenticated %}disabled{% endif %} name="content" id="content" class="form-control" rows="10"> {% if not user.is_authenticated %} 로그인 후 이용해주세요. {% endif %} </textarea>
             </div> <!-- 댓글작성 textarea 활성화/비활성화 끝-->
