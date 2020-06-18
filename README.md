@@ -3,7 +3,7 @@
  Tool - VScode, Spyder  
  OS/DB - Window10, MySQL, Postgresql  
  language - Python, Django   
- Web language - HTML5, CSS, Jquery, javascript
+ Web Standard - HTML5, CSS, Jquery, javascript
  
  * 개발일지
  2020.05.18 ~ 2020.05.22 - 아이디어 구상 및 계획 수립  
