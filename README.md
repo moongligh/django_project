@@ -2,8 +2,8 @@
  * 개발환경  
  Tool - VScode, Spyder  
  OS/DB - Window10, MySQL, Postgresql  
- language - Python, Django   
- Web Standard - HTML5, CSS, Jquery, javascript
+ Front-End - Jquery, javascript
+ Back-End - Python, Django
 
  
  * 개선할 점
