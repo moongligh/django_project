@@ -1,13 +1,12 @@
 # django_project
  * 개발환경  
- Tool - VScode, Spyder
+ Tool - VScode, Spyder  
  Language - Python 3.8.2-64bit  
  OS/DB - Window10, MySQL 6.1, Postgresql  
- Front-End - Jquery, javascript
- Back-End - Python, Django
+ Front-End - Jquery, javascript  
+ Back-End - Python, Django  
 
- 
- * 개선할 점
+ * 개선할 점  
   자기소개, 프로필과 같은 회원사용 페이지 제작  
   저작권법을위한 개인정보 동의서 삽입  
   게시판에서 카테고리를 뱃지형식으로 보여주는데 영문이라 한글로 변경이 필요함.  
