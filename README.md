@@ -1,7 +1,7 @@
 # django_project
  * 개발환경  
  Tool - VScode, Spyder
- Language - Python 3.8.2-64bit
+ Language - Python 3.8.2-64bit  
  OS/DB - Window10, MySQL 6.1, Postgresql  
  Front-End - Jquery, javascript
  Back-End - Python, Django
